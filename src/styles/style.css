@@ -1,0 +1,55 @@
+:root {
+  --primary: #737bff;
+  --secondary: #535353;
+  --light: #a7b5fb;
+  --purple: #97aad8;
+  --white: #f3f4f7;
+  --gray: #a7a8ae;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #a7b5fb6f;
+}
+
+.card {
+  -webkit-box-shadow: 2px 2px 12px 0px rgba(64, 64, 64, 1);
+  -moz-box-shadow: 2px 2px 12px 0px rgba(64, 64, 64, 1);
+  box-shadow: 2px 2px 12px 0px rgba(64, 64, 64, 1);
+}
+
+.card-subtitle {
+  font-size: 14px;
+  color: var(--gray);
+}
+
+.shadow {
+  -webkit-box-shadow: 2px 2px 12px 0px rgba(64, 64, 64, 1);
+  -moz-box-shadow: 2px 2px 12px 0px rgba(64, 64, 64, 1);
+  box-shadow: 2px 2px 12px 0px rgba(64, 64, 64, 1);
+}
+
+.card-header {
+  background-color: transparent;
+  border-bottom: none;
+}
+
+.card-title {
+  font-weight: 600;
+}
+
+.dropdown-menu {
+  -webkit-box-shadow: 2px 2px 12px 0px rgba(64, 64, 64, 1);
+  -moz-box-shadow: 2px 2px 12px 0px rgba(64, 64, 64, 1);
+  box-shadow: 2px 2px 12px 0px rgba(64, 64, 64, 1);
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
