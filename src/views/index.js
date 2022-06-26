@@ -60,6 +60,12 @@ function Notepad() {
     }
   }
 
+  const allNotes = data.filter((note) => note.archived === false)
+  const notesArchived = data.filter((note) => note.archived === true)
+  const filteredResultArchived = filteredResult.filter(
+    (note) => note.archived === true
+  )
+
   useEffect(() => {
     function inputData() {
       const isExist = data.some((note) => note.id === childData?.id)
@@ -86,41 +92,49 @@ function Notepad() {
       <Container className='px-0'>
         <h2 className='mt-5 text-secondary mb-4'>Semua Catatan</h2>
         <Row>
-          {filteredResult.length > 0
-            ? filteredResult.map((note) => (
-                <Col lg={3} md={6} sm={6} key={note.id} className='mb-3'>
-                  <NoteCard
-                    title={note.title}
-                    body={note.body}
-                    createdAt={note.createdAt}
-                    archived={note.archived}
-                    deleteNote={() => handleDelete(note.id)}
-                    archivedNote={() => setArchived(note.id)}
-                    removeArchived={() => removeArchived(note.id)}
-                  />
-                </Col>
-              ))
-            : data.map((note) => (
-                <Col lg={3} md={6} sm={6} key={note.id} className='mb-3'>
-                  <NoteCard
-                    title={note.title}
-                    body={note.body}
-                    createdAt={note.createdAt}
-                    archived={note.archived}
-                    deleteNote={() => handleDelete(note.id)}
-                    archivedNote={() => setArchived(note.id)}
-                    removeArchived={() => removeArchived(note.id)}
-                  />
-                </Col>
-              ))}
+          {filteredResult.length > 0 ? (
+            filteredResult.map((note) => (
+              <Col lg={3} md={6} sm={6} key={note.id} className='mb-3'>
+                <NoteCard
+                  title={note.title}
+                  body={note.body}
+                  createdAt={note.createdAt}
+                  archived={note.archived}
+                  deleteNote={() => handleDelete(note.id)}
+                  archivedNote={() => setArchived(note.id)}
+                  removeArchived={() => removeArchived(note.id)}
+                />
+              </Col>
+            ))
+          ) : filteredResult <= 0 && q !== '' ? (
+            <Alert variant='warning'>Maaf, hasil tidak ditemukan</Alert>
+          ) : allNotes.length > 0 ? (
+            allNotes.map((note) => (
+              <Col lg={3} md={6} sm={6} key={note.id} className='mb-3'>
+                <NoteCard
+                  title={note.title}
+                  body={note.body}
+                  createdAt={note.createdAt}
+                  archived={note.archived}
+                  deleteNote={() => handleDelete(note.id)}
+                  archivedNote={() => setArchived(note.id)}
+                  removeArchived={() => removeArchived(note.id)}
+                />
+              </Col>
+            ))
+          ) : (
+            <Alert variant='danger'>
+              Catatan kosong, silakan buat catatan.
+            </Alert>
+          )}
         </Row>
       </Container>
       <Container className='px-0'>
         <h2 className='mt-5 text-secondary mb-4'>Arsip</h2>
         <Row>
-          {data.map(
-            (note) =>
-              note.archived === true && (
+          {filteredResult.length > 0 ? (
+            filteredResultArchived.length > 0 ? (
+              filteredResultArchived.map((note) => (
                 <Col lg={3} md={6} sm={6} key={note.id} className='mb-3'>
                   <NoteCard
                     title={note.title}
@@ -131,7 +145,29 @@ function Notepad() {
                     removeArchived={() => removeArchived(note.id)}
                   />
                 </Col>
-              )
+              ))
+            ) : (
+              <Alert variant='warning'>Maaf, hasil tidak ditemukan.</Alert>
+            )
+          ) : filteredResult <= 0 && q !== '' ? (
+            <Alert variant='warning'>Maaf, hasil tidak ditemukan.</Alert>
+          ) : notesArchived.length > 0 ? (
+            notesArchived.map((note) => (
+              <Col lg={3} md={6} sm={6} key={note.id} className='mb-3'>
+                <NoteCard
+                  title={note.title}
+                  body={note.body}
+                  createdAt={note.createdAt}
+                  archived={note.archived}
+                  deleteNote={() => handleDelete(note.id)}
+                  removeArchived={() => removeArchived(note.id)}
+                />
+              </Col>
+            ))
+          ) : (
+            <Alert variant='danger'>
+              Arsip kosong, silakan arsipkan catatan.
+            </Alert>
           )}
         </Row>
       </Container>
